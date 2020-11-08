@@ -13,7 +13,6 @@ class App extends Component {
       { id: 'habit2', name: 'Running', count: 0 },
       { id: 'habit3', name: 'Coding', count: 0 },
     ],
-    totalCounts: 0,
   };
 
   handleAddHabit = (habitValue) => {
@@ -38,10 +37,7 @@ class App extends Component {
     const habits = [...this.state.habits];
     const idx = habits.indexOf(habit);
     habits[idx].count++;
-    const total = habits.filter((habit) => {
-      return habit.count > 0;
-    }).length;
-    this.setState({ habits: habits, totalCounts: total });
+    this.setState({ habits: habits });
     // this.setState({ habits }); // 위와 동일한 코드
   };
 
@@ -53,32 +49,28 @@ class App extends Component {
     // habits[idx].count = count < 0 ? 0 : count;
     habits[idx].count =
       (habits[idx].count--, habits[idx].count < 0 ? 0 : habits[idx].count);
-    const total = habits.filter((habit) => {
-      return habit.count > 0;
-    }).length;
-    this.setState({ habits: habits, totalCounts: total });
+    this.setState({ habits: habits });
   };
 
   handleDelete = (habit) => {
     const habits = this.state.habits.filter((item) => {
       return item.id !== habit.id;
     });
-    const total = habits.filter((habit) => {
-      return habit.count > 0;
-    }).length;
-    this.setState({ habits: habits, totalCounts: total });
+    this.setState({ habits: habits });
   };
 
   handleReset = () => {
     const habits = [...this.state.habits];
-    habits.map((habit) => (habit.count = 0));
+    habits.forEach((habit) => (habit.count = 0));
     this.setState({ habits: habits });
   };
 
   render() {
     return (
       <>
-        <Navbar totalCounts={this.state.totalCounts}></Navbar>
+        <Navbar
+          totalCount={this.state.habits.filter((item) => item.count > 0).length}
+        ></Navbar>
         <Addform onAddHabit={this.handleAddHabit}></Addform>
         <Habits
           habits={this.state.habits}
