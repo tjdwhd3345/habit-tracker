@@ -20,7 +20,7 @@ class Addform extends Component {
           ref={this.inputRef}
           className="add-input"
           type="text"
-          id="ipt1"
+          autoComplete="off"
           placeholder="습관을 입력하시오."
         />
         <button className="add-button">Add</button>
