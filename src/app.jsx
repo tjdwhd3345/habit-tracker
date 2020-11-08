@@ -16,7 +16,22 @@ class App extends Component {
     totalCounts: 0,
   };
 
-  handleAddHabit = () => {};
+  handleAddHabit = (habitValue) => {
+    const habits = [...this.state.habits];
+    const hasHabit = habits.some((habit) => {
+      return habit.id.split('habit_')[1] === habitValue;
+    });
+    if (!hasHabit) {
+      habits.push({
+        id: 'habit_' + habitValue,
+        name: habitValue,
+        count: 0,
+      });
+      this.setState({ habits: habits });
+    } else {
+      alert('이미 있는 Habit임.');
+    }
+  };
 
   handleIncrement = (habit) => {
     // console.log('habits.jsx handleIncrement', habit);
@@ -64,7 +79,7 @@ class App extends Component {
     return (
       <>
         <Navbar totalCounts={this.state.totalCounts}></Navbar>
-        <Addform></Addform>
+        <Addform onAddHabit={this.handleAddHabit}></Addform>
         <Habits
           habits={this.state.habits}
           onIncrement={this.handleIncrement}
