@@ -1,18 +1,26 @@
 import React, { Component } from 'react';
 
 class Addform extends Component {
-  handleAddHabit = () => {
-    const iptObj = document.getElementById('ipt1');
-    this.props.onAddHabit(iptObj.value);
+  inputRef = React.createRef(); // React 16.3^
+  handleAddHabit = (event) => {
+    event.preventDefault();
+    // console.log(this.inputRef.current.value);
+    const name = this.inputRef.current.value;
+    this.props.onAddHabit(name);
+    this.inputRef.current.value = '';
   };
   render() {
     return (
-      <>
-        <input className="add-input" type="text" id="ipt1" />
-        <button className="add-button" onClick={this.handleAddHabit}>
-          Add
-        </button>
-      </>
+      <form className="add-form" onSubmit={this.handleAddHabit}>
+        <input
+          ref={this.inputRef}
+          className="add-input"
+          type="text"
+          id="ipt1"
+          placeholder="습관을 입력하시오."
+        />
+        <button className="add-button">Add</button>
+      </form>
     );
   }
 }
