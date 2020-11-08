@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './app.css';
 import Navbar from './components/navbar';
-import Addform from './components/addform';
 import Habits from './components/habits';
 import Reset from './components/reset';
 
@@ -15,15 +14,15 @@ class App extends Component {
     ],
   };
 
-  handleAddHabit = (habitValue) => {
+  handleAddHabit = (habitName) => {
     const habits = [...this.state.habits];
     const hasHabit = habits.some((habit) => {
-      return habit.id.split('habit_')[1] === habitValue;
+      return habit.name.toLowerCase() === habitName.toLowerCase();
     });
     if (!hasHabit) {
       habits.push({
-        id: 'habit_' + habitValue,
-        name: habitValue,
+        id: 'habit_' + habitName,
+        name: habitName,
         count: 0,
       });
       this.setState({ habits: habits });
@@ -71,12 +70,12 @@ class App extends Component {
         <Navbar
           totalCount={this.state.habits.filter((item) => item.count > 0).length}
         ></Navbar>
-        <Addform onAddHabit={this.handleAddHabit}></Addform>
         <Habits
           habits={this.state.habits}
           onIncrement={this.handleIncrement}
           onDecrement={this.handleDecrement}
           onDelete={this.handleDelete}
+          onAddHabit={this.handleAddHabit}
         ></Habits>
         <Reset onReset={this.handleReset}></Reset>
       </>
