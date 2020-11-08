@@ -6,6 +6,10 @@ class Addform extends Component {
     event.preventDefault();
     // console.log(this.inputRef.current.value);
     const name = this.inputRef.current.value;
+    if (name.length === 0) {
+      alert('습관을 한글자 이상 입력하시오');
+      return;
+    }
     this.props.onAddHabit(name);
     this.inputRef.current.value = '';
   };
