@@ -11,7 +11,8 @@ class Addform extends PureComponent {
       return;
     }
     this.props.onAddHabit(name);
-    this.inputRef.current.reset();
+    // this.inputRef.current.reset();
+    this.inputRef.current.value = '';
   };
   render() {
     console.log('addform.jsx');
