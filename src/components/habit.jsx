@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 
-class Habit extends Component {
+class Habit extends PureComponent {
   handleIncrement = () => {
     //   //console.log('increaseCount: ', event);
     //   //이런식으로 직접 state 변수를 set 만 하면 리액트가 변화를 감지하지 못함.
@@ -23,7 +23,8 @@ class Habit extends Component {
   render() {
     // console.log('habit.jsx render: ', this.props.habit);
     console.log('habit.jsx');
-    const { name, count } = this.props.habit;
+    const { name } = this.props.habit;
+    const { count } = this.props;
     return (
       <li className="habit">
         <span className="habit-name">{name}</span>
