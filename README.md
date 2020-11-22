@@ -1,3 +1,18 @@
+
+
+# Habit-Tracker
+
+React 의 기초 동작 및 구문을 학습하기 위한 프로젝트.
+1. React 컴포넌트 (Class, Function)
+2. JSX 구문
+3. State, Props
+4. Ref
+
+### 실행화면
+![habit_tracker](./public/habit-tracker.png)
+
+
+---
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
