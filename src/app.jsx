@@ -65,6 +65,7 @@ class App extends Component {
   };
 
   render() {
+    console.log('app.jsx render');
     return (
       <>
         <Navbar

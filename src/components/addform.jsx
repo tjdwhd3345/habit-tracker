@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 
-class Addform extends Component {
+class Addform extends PureComponent {
   inputRef = React.createRef(); // React 16.3^
   handleAddHabit = (event) => {
     event.preventDefault();
@@ -11,9 +11,10 @@ class Addform extends Component {
       return;
     }
     this.props.onAddHabit(name);
-    this.inputRef.current.value = '';
+    this.inputRef.current.reset();
   };
   render() {
+    console.log('addform.jsx');
     return (
       <form className="add-form" onSubmit={this.handleAddHabit}>
         <input
