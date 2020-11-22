@@ -33,21 +33,27 @@ class App extends Component {
 
   handleIncrement = (habit) => {
     // console.log('habits.jsx handleIncrement', habit);
-    const habits = [...this.state.habits];
-    const idx = habits.indexOf(habit);
-    habits[idx].count++;
+    const habits = this.state.habits.map((item) => {
+      if (item.id === habit.id) {
+        return { ...habit, count: item.count + 1 };
+      }
+      return item;
+    });
     this.setState({ habits: habits });
     // this.setState({ habits }); // 위와 동일한 코드
   };
 
   handleDecrement = (habit) => {
     // console.log('habits.jsx handleDecrement', habit);
-    const habits = [...this.state.habits];
-    const idx = habits.indexOf(habit);
-    // const count = habits[idx].count - 1;
-    // habits[idx].count = count < 0 ? 0 : count;
-    habits[idx].count =
-      (habits[idx].count--, habits[idx].count < 0 ? 0 : habits[idx].count);
+    const habits = this.state.habits.map((item) => {
+      if (item.id === habit.id) {
+        return {
+          ...habit,
+          count: (--item.count, item.count < 0 ? 0 : item.count),
+        };
+      }
+      return item;
+    });
     this.setState({ habits: habits });
   };
 
@@ -59,8 +65,12 @@ class App extends Component {
   };
 
   handleReset = () => {
-    const habits = [...this.state.habits];
-    habits.forEach((habit) => (habit.count = 0));
+    const habits = this.state.habits.map((habit) => {
+      if (habit.count !== 0) {
+        return { ...habit, count: 0 };
+      }
+      return habit;
+    });
     this.setState({ habits: habits });
   };
 
