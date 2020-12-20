@@ -1,6 +1,16 @@
 import React, { PureComponent } from 'react';
 
 class Habit extends PureComponent {
+  // lifecycle 20/12/20
+  componentDidMount() {
+    // component 가 등록될때 호출됨.
+    console.log(`habit: ${this.props.habit.name} mounted`);
+  }
+  componentWillUnmount() {
+    // component 가 삭제되기 전에 호출됨.
+    console.log(`habit: ${this.props.habit.name} will unmount`);
+  }
+
   handleIncrement = () => {
     //   //console.log('increaseCount: ', event);
     //   //이런식으로 직접 state 변수를 set 만 하면 리액트가 변화를 감지하지 못함.
