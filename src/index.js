@@ -9,8 +9,8 @@ console.log('index.js');
 
 ReactDOM.render(
   <React.StrictMode>
-    {/* <App /> */}
-    <SimpleHabit />
+    <App />
+    {/* <SimpleHabit /> */}
   </React.StrictMode>,
   document.getElementById('root')
 );

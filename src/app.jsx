@@ -1,97 +1,102 @@
-import React, { Component } from 'react';
+import React, { useCallback, useState } from 'react';
 import './app.css';
 import Navbar from './components/navbar';
 import Habits from './components/habits';
 import Reset from './components/reset';
 
-//function App() {
-class App extends Component {
-  state = {
-    habits: [
-      { id: 'habit1', name: 'Reading', count: 0 },
-      { id: 'habit2', name: 'Running', count: 0 },
-      { id: 'habit3', name: 'Coding', count: 0 },
-    ],
-  };
+const App = () => {
+  console.log('app.jsx render');
+  const [habits, setHabits] = useState([
+    { id: 'habit1', name: 'Reading', count: 0 },
+    { id: 'habit2', name: 'Running', count: 0 },
+    { id: 'habit3', name: 'Coding', count: 0 },
+  ]);
 
-  handleAddHabit = (habitName) => {
-    const habits = [...this.state.habits];
+  const handleAddHabit = useCallback((habitName) => {
+    console.log('handleAddHabit', habitName);
     const hasHabit = habits.some((habit) => {
       return habit.name.toLowerCase() === habitName.toLowerCase();
     });
     if (!hasHabit) {
-      habits.push({
-        id: 'habit_' + habitName,
-        name: habitName,
-        count: 0,
+      habits.push();
+      setHabits((habits) => {
+        return [
+          ...habits,
+          {
+            id: 'habit_' + habitName,
+            name: habitName,
+            count: 0,
+          },
+        ];
       });
-      this.setState({ habits: habits });
     } else {
       alert('이미 있는 Habit임.');
     }
-  };
+  }, []);
 
-  handleIncrement = (habit) => {
+  const handleIncrement = useCallback((habit) => {
     // console.log('habits.jsx handleIncrement', habit);
-    const habits = this.state.habits.map((item) => {
-      if (item.id === habit.id) {
-        return { ...habit, count: item.count + 1 };
-      }
-      return item;
+    setHabits((habits) => {
+      return habits.map((item) => {
+        if (item.id === habit.id) {
+          return { ...habit, count: item.count + 1 };
+        }
+        return item;
+      });
     });
-    this.setState({ habits: habits });
-    // this.setState({ habits }); // 위와 동일한 코드
-  };
+  }, []);
 
-  handleDecrement = (habit) => {
-    // console.log('habits.jsx handleDecrement', habit);
-    const habits = this.state.habits.map((item) => {
-      if (item.id === habit.id) {
-        return {
-          ...habit,
-          count: (--item.count, item.count < 0 ? 0 : item.count),
-        };
-      }
-      return item;
+  const handleDecrement = useCallback((habit) => {
+    console.log('habits.jsx handleDecrement', habit);
+    setHabits((habits) => {
+      return habits.map((item) => {
+        if (item.id === habit.id) {
+          const count = habit.count - 1;
+          return {
+            ...habit,
+            count: count < 0 ? 0 : count,
+            /* count: (--item.count, item.count < 0 ? 0 : item.count), */
+          };
+        }
+        return item;
+      });
     });
-    this.setState({ habits: habits });
-  };
+  }, []);
 
-  handleDelete = (habit) => {
-    const habits = this.state.habits.filter((item) => {
-      return item.id !== habit.id;
+  const handleDelete = useCallback((habit) => {
+    setHabits((habits) => {
+      return habits.filter((item) => {
+        return item.id !== habit.id;
+      });
     });
-    this.setState({ habits: habits });
-  };
+  }, []);
 
-  handleReset = () => {
-    const habits = this.state.habits.map((habit) => {
-      if (habit.count !== 0) {
-        return { ...habit, count: 0 };
-      }
-      return habit;
+  const handleReset = useCallback(() => {
+    setHabits((habits) => {
+      return habits.map((habit) => {
+        if (habit.count !== 0) {
+          return { ...habit, count: 0 };
+        }
+        return habit;
+      });
     });
-    this.setState({ habits: habits });
-  };
+  }, []);
 
-  render() {
-    console.log('app.jsx render');
-    return (
-      <>
-        <Navbar
-          totalCount={this.state.habits.filter((item) => item.count > 0).length}
-        ></Navbar>
-        <Habits
-          habits={this.state.habits}
-          onIncrement={this.handleIncrement}
-          onDecrement={this.handleDecrement}
-          onDelete={this.handleDelete}
-          onAddHabit={this.handleAddHabit}
-        ></Habits>
-        <Reset onReset={this.handleReset}></Reset>
-      </>
-    );
-  }
-}
+  return (
+    <>
+      <Navbar
+        totalCount={habits.filter((item) => item.count > 0).length}
+      ></Navbar>
+      <Habits
+        habits={habits}
+        onIncrement={handleIncrement}
+        onDecrement={handleDecrement}
+        onDelete={handleDelete}
+        onAddHabit={handleAddHabit}
+      ></Habits>
+      <Reset onReset={handleReset}></Reset>
+    </>
+  );
+};
 
 export default App;
