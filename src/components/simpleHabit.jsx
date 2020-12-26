@@ -14,7 +14,7 @@ const SimpleHabit = (props) => {
 
   const handleIncrement = useCallback(() => {
     setCount(count + 1);
-  });
+  }, [count]);
 
   /* function componenet 에서 컴포넌트가 mount, update 될 때마다 실행되는 함수.
    * 두번째 인자로 특정 변수를 지정해주면 해당 변수가 변할 때만 실행됨.
