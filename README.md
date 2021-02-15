@@ -13,6 +13,11 @@ React 의 기초 동작 및 구문을 학습하기 위한 프로젝트.
 ### 실행화면
 ![habit_tracker](./public/habit-tracker.png)
 
+## 기능
+* 총 Habits 수 누적
+* Habit 추가 (중복제거) / 삭제
+* Habit Count 초기화
+* Habit 변경 시 memo 를 사용하여 필요한 부분만 렌더링
 
 ---
 # Getting Started with Create React App
