@@ -7,7 +7,7 @@ const Habits = ({ habits, onAddHabit, onIncrement, onDecrement, onDelete }) => {
   return (
     <>
       <Addform onAddHabit={onAddHabit}></Addform>
-      <ul className='habits'>
+      <ul className='habits no-scroll'>
         {habits.map((habit) => {
           return (
             <Habit

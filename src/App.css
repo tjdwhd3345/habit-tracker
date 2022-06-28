@@ -72,9 +72,12 @@ button {
 /* habits */
 .habits {
   height: 100%;
-  margin-top: -10em;
-  padding-top: 11em;
+  margin-top: -12em;
+  padding-top: 12em;
   overflow: auto;
+}
+.no-scroll::-webkit-scrollbar {
+  display: none;
 }
 
 .habit {
