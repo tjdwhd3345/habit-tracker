@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 
 const Habit = memo(({ habit, onIncrement, onDecrement, onDelete }) => {
-  console.log('habit.jsx');
+  // console.log('habit.jsx');
   const handleIncrement = () => {
     //   //console.log('increaseCount: ', event);
     //   //이런식으로 직접 state 변수를 set 만 하면 리액트가 변화를 감지하지 못함.
@@ -22,18 +22,28 @@ const Habit = memo(({ habit, onIncrement, onDecrement, onDelete }) => {
   };
 
   return (
-    <li className="habit">
-      <span className="habit-name">{habit.name}</span>
-      <span className="habit-count">{habit.count}</span>
-      <button className="habit-button habit-increase" onClick={handleIncrement}>
-        <i className="fas fa-plus-square"></i>
-      </button>
-      <button className="habit-button habit-decrease" onClick={handleDecrement}>
-        <i className="fas fa-minus-square"></i>
-      </button>
-      <button className="habit-button habit-delete" onClick={handleDelete}>
-        <i className="fas fa-trash"></i>
-      </button>
+    <li className='habit'>
+      <div className='habit-name-wrap'>
+        <span className='habit-name'>{habit.name}</span>
+      </div>
+      <div className='habit-icon-wrap'>
+        <span className='habit-count'>{habit.count}</span>
+        <button
+          className='habit-button habit-increase'
+          onClick={handleIncrement}
+        >
+          <i className='fas fa-plus-square'></i>
+        </button>
+        <button
+          className='habit-button habit-decrease'
+          onClick={handleDecrement}
+        >
+          <i className='fas fa-minus-square'></i>
+        </button>
+        <button className='habit-button habit-delete' onClick={handleDelete}>
+          <i className='fas fa-trash'></i>
+        </button>
+      </div>
     </li>
   );
 });

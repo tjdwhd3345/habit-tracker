@@ -5,7 +5,7 @@ import App from './app';
 import '@fortawesome/fontawesome-free/js/all.js';
 import SimpleHabit from './components/simpleHabit';
 
-console.log('index.js');
+// console.log('index.js');
 
 ReactDOM.render(
   <React.StrictMode>

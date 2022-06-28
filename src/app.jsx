@@ -1,19 +1,29 @@
 import React, { useCallback, useState } from 'react';
-import './app.css';
+import './App.css';
 import Navbar from './components/navbar';
 import Habits from './components/habits';
 import Reset from './components/reset';
 
 const App = () => {
-  console.log('app.jsx render');
+  // console.log('app.jsx render');
   const [habits, setHabits] = useState([
     { id: 'habit1', name: 'Reading', count: 0 },
     { id: 'habit2', name: 'Running', count: 0 },
     { id: 'habit3', name: 'Coding', count: 0 },
+    { id: '4', name: '물마시기', count: 0 },
+    { id: '5', name: '술마시기', count: 0 },
+    { id: '6', name: '커피마시기', count: 0 },
+    { id: '7', name: '산책하기', count: 0 },
+    { id: '8', name: '걷기', count: 0 },
+    { id: '9', name: '전화하기', count: 0 },
+    { id: '10', name: '노래듣기', count: 0 },
+    { id: '11', name: '노래부르기', count: 0 },
+    { id: '12', name: '가', count: 0 },
+    { id: '13', name: '나', count: 0 },
   ]);
 
   const handleAddHabit = useCallback((habitName) => {
-    console.log('handleAddHabit', habitName);
+    // console.log('handleAddHabit', habitName);
     const hasHabit = habits.some((habit) => {
       return habit.name.toLowerCase() === habitName.toLowerCase();
     });
@@ -30,7 +40,7 @@ const App = () => {
         ];
       });
     } else {
-      alert('이미 있는 Habit임.');
+      alert('같음 이름의 습관이 있습니다');
     }
   }, []);
 
@@ -47,7 +57,7 @@ const App = () => {
   }, []);
 
   const handleDecrement = useCallback((habit) => {
-    console.log('habits.jsx handleDecrement', habit);
+    // console.log('habits.jsx handleDecrement', habit);
     setHabits((habits) => {
       return habits.map((item) => {
         if (item.id === habit.id) {

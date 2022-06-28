@@ -3,11 +3,11 @@ import Habit from './habit';
 import Addform from './addform';
 
 const Habits = ({ habits, onAddHabit, onIncrement, onDecrement, onDelete }) => {
-  console.log('habits.jsx');
+  // console.log('habits.jsx');
   return (
     <>
       <Addform onAddHabit={onAddHabit}></Addform>
-      <ul>
+      <ul className='habits'>
         {habits.map((habit) => {
           return (
             <Habit

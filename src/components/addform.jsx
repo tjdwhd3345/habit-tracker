@@ -16,24 +16,24 @@ const Addform = memo((props) => {
     // console.log(this.inputRef.current.value);
     const name = inputRef.current.value;
     if (name.length === 0) {
-      alert('습관을 한글자 이상 입력하시오');
+      alert('습관을 한글자 이상 입력하세요');
       return;
     }
     props.onAddHabit(name);
     // this.inputRef.current.reset();
     inputRef.current.value = '';
-    console.log('addform.jsx');
+    // console.log('addform.jsx');
   };
   return (
-    <form className="add-form" onSubmit={handleAddHabit}>
+    <form className='add-form' onSubmit={handleAddHabit}>
       <input
         ref={inputRef}
-        className="add-input"
-        type="text"
-        autoComplete="off"
-        placeholder="습관을 입력하시오."
+        className='add-input'
+        type='text'
+        autoComplete='off'
+        placeholder='습관을 입력해주세요.'
       />
-      <button className="add-button">Add</button>
+      <button className='add-button'>Add</button>
     </form>
   );
 });

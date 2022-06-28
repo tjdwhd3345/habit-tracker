@@ -1,10 +1,10 @@
 import React, { memo } from 'react';
 
 const Reset = memo(({ onReset }) => {
-  console.log('reset.jsx');
+  // console.log('reset.jsx');
   return (
     <>
-      <button className="habits-reset" onClick={onReset}>
+      <button className='habits-reset' onClick={onReset}>
         Reset All
       </button>
     </>
