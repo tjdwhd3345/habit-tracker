@@ -163,6 +163,9 @@ button {
   .add-button {
     font-size: 1.75rem;
   }
+  .habits {
+    padding-bottom: 4em;
+  }
   .habit {
     font-size: 2rem;
   }
