@@ -1,12 +1,19 @@
 import React, { useCallback, useState } from 'react';
 import './App.css';
 import Navbar from './components/navbar';
+import Addform from './components/addform';
 import Habits from './components/habits';
 import Reset from './components/reset';
 
+export interface HabitProps {
+  id: string,
+  name: string,
+  count: number
+}
+
 const App = () => {
   // console.log('app.jsx render');
-  const [habits, setHabits] = useState([
+  const [habits, setHabits] = useState<HabitProps[]>([
     { id: 'habit1', name: 'Reading', count: 0 },
     { id: 'habit2', name: 'Running', count: 0 },
     { id: 'habit3', name: 'Coding', count: 0 },
@@ -22,9 +29,9 @@ const App = () => {
     { id: '13', name: '나', count: 0 },
   ]);
 
-  const handleAddHabit = useCallback((habitName) => {
+  const handleAddHabit = useCallback((habitName: string) => {
     // console.log('handleAddHabit', habitName);
-    const hasHabit = habits.some((habit) => {
+    const hasHabit: boolean = habits.some((habit: HabitProps) => {
       return habit.name.toLowerCase() === habitName.toLowerCase();
     });
     if (!hasHabit) {
@@ -42,12 +49,12 @@ const App = () => {
     } else {
       alert('같음 이름의 습관이 있습니다');
     }
-  }, []);
+  }, [habits]);
 
-  const handleIncrement = useCallback((habit) => {
+  const handleIncrement = useCallback((habit: HabitProps) => {
     // console.log('habits.jsx handleIncrement', habit);
     setHabits((habits) => {
-      return habits.map((item) => {
+      return habits.map((item: HabitProps) => {
         if (item.id === habit.id) {
           return { ...habit, count: item.count + 1 };
         }
@@ -56,10 +63,10 @@ const App = () => {
     });
   }, []);
 
-  const handleDecrement = useCallback((habit) => {
+  const handleDecrement = useCallback((habit: HabitProps) => {
     // console.log('habits.jsx handleDecrement', habit);
     setHabits((habits) => {
-      return habits.map((item) => {
+      return habits.map((item: HabitProps) => {
         if (item.id === habit.id) {
           const count = habit.count - 1;
           return {
@@ -73,9 +80,9 @@ const App = () => {
     });
   }, []);
 
-  const handleDelete = useCallback((habit) => {
+  const handleDelete = useCallback((habit: HabitProps) => {
     setHabits((habits) => {
-      return habits.filter((item) => {
+      return habits.filter((item: HabitProps) => {
         return item.id !== habit.id;
       });
     });
@@ -83,7 +90,7 @@ const App = () => {
 
   const handleReset = useCallback(() => {
     setHabits((habits) => {
-      return habits.map((habit) => {
+      return habits.map((habit: HabitProps) => {
         if (habit.count !== 0) {
           return { ...habit, count: 0 };
         }
@@ -96,15 +103,15 @@ const App = () => {
     <>
       <Navbar
         totalCount={habits.filter((item) => item.count > 0).length}
-      ></Navbar>
+      />
+      <Addform onAddHabit={handleAddHabit} />
       <Habits
         habits={habits}
         onIncrement={handleIncrement}
         onDecrement={handleDecrement}
         onDelete={handleDelete}
-        onAddHabit={handleAddHabit}
-      ></Habits>
-      <Reset onReset={handleReset}></Reset>
+      />
+      <Reset onReset={handleReset}/>
     </>
   );
 };

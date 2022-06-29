@@ -1,6 +1,10 @@
 import React, { memo } from 'react';
 
-const Navbar = memo(({ totalCount }) => {
+interface NavbarProps {
+  totalCount: number
+}
+
+const Navbar = memo(({ totalCount }: NavbarProps) => {
   // console.log('navbar.jsx');
   return (
     <nav className='navbar'>

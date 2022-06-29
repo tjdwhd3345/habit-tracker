@@ -1,6 +1,10 @@
 import React, { memo } from 'react';
 
-const Reset = memo(({ onReset }) => {
+interface ResetProps {
+  onReset: () => void
+}
+
+const Reset = memo(({ onReset }: ResetProps) => {
   // console.log('reset.jsx');
   return (
     <>

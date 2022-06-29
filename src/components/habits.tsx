@@ -1,14 +1,22 @@
 import React from 'react';
 import Habit from './habit';
-import Addform from './addform';
+import { HabitProps } from '../app'
 
-const Habits = ({ habits, onAddHabit, onIncrement, onDecrement, onDelete }) => {
+export interface HabitsCompFuncProps {
+  onIncrement: (habit: HabitProps) => void
+  onDecrement: (habit: HabitProps) => void
+  onDelete: (habit: HabitProps) => void
+}
+interface HabitsCompProps extends HabitsCompFuncProps{ 
+  habits: HabitProps[]
+}
+
+const Habits = ({ habits, onIncrement, onDecrement, onDelete }: HabitsCompProps) => {
   // console.log('habits.jsx');
   return (
     <>
-      <Addform onAddHabit={onAddHabit}></Addform>
       <ul className='habits no-scroll'>
-        {habits.map((habit) => {
+        {habits.map((habit: HabitProps) => {
           return (
             <Habit
               key={habit.id}

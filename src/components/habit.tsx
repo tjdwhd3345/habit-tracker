@@ -1,6 +1,12 @@
 import React, { memo } from 'react';
+import { HabitProps } from '../app'
+import { HabitsCompFuncProps } from './habits'
 
-const Habit = memo(({ habit, onIncrement, onDecrement, onDelete }) => {
+interface HabitCompProps extends HabitsCompFuncProps{
+  habit: HabitProps
+}
+
+const Habit = memo(({ habit, onIncrement, onDecrement, onDelete }: HabitCompProps) => {
   // console.log('habit.jsx');
   const handleIncrement = () => {
     //   //console.log('increaseCount: ', event);
